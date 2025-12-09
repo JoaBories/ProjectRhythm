@@ -1,31 +1,26 @@
 #pragma once
 
 #include "GlobalVariables.h"
+#include "AssetBank.h"
 
-#include "Util.h"
 using Struct::Transform2D;
-
-#include <map>
-using std::map;
 
 enum Tag
 {
-	TagDefault,
-	TagFish,
-	TagPredator
+	TagDefault
 };
 
 class GameActor
 {
 
 private:
-	void AddActorToRenderList(short renderPriority, GameActor* actor);
 	void AddActorToLogicList(short logicPriority, GameActor* actor);
+	void AddActorToRenderList(short renderPriority, GameActor* actor);
 	void AddActorToTagMap(Tag tag, GameActor* actor);
 
-	static map<short, vector<GameActor*>> mActorLogicList;
-	static map<short, vector<GameActor*>> mActorRenderList;
-	static map<Tag, vector<GameActor*>> mActorTagMap;
+	static std::map<short, std::vector<GameActor*>> mActorLogicList;
+	static std::map<short, std::vector<GameActor*>> mActorRenderList;
+	static std::unordered_map<Tag, std::vector<GameActor*>> mActorTagMap;
 
 protected:
 	short mLogicPriority;
@@ -40,32 +35,32 @@ protected:
 
 public:
 	//Static for all GameActors
-	static vector<GameActor*> GetActorsByTag(Tag tag);
-	static void KillPendingActors();
+	static void KillPendingsActors();
+	static void Killa();
 
-	inline static map<short, vector<GameActor*>> GetActorsLogic() { return mActorLogicList; };
-	inline static map<short, vector<GameActor*>> GetActorsRender() { return mActorRenderList; };
+	static std::vector<GameActor*> GetActorsByTag(Tag tag);
+	inline static std::map<short, std::vector<GameActor*>> GetActorsLogic()		{ return mActorLogicList; };
+	inline static std::map<short, std::vector<GameActor*>> GetActorsRender()	{ return mActorRenderList; };
 
 	//Public for object only
 	GameActor();
-	~GameActor() = default;
+	inline ~GameActor() {};
 
 	GameActor(short logicPriority, short renderPriority, Transform2D transform, Tag tag);
-
-	void Destroy();
 
 	virtual void Init() = 0;
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
 
-	Transform2D GetTransform() const;
-	void SetTransform(Transform2D transform);
+	inline Transform2D GetTransform() const										{ return mTransform; };
+	inline void SetTransform(Transform2D transform)								{ mTransform = transform; };
 
-	Tag GetTag() const;
+	inline Tag GetTag() const													{ return mTag; };
 
-	bool IsActive() const;
-	void SetActive(bool active);
+	inline bool IsActive() const												{ return mActive; };
+	inline void SetActive(bool active)											{ mActive = active; };
 
-	bool ShouldBeDestroyed() const;
+	inline bool ShouldBeDestroyed() const										{ return mPendingDestroy; };
+	inline void Destroy()														{ mPendingDestroy = true; };
 };
 

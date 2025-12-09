@@ -39,10 +39,10 @@
     <ClCompile Include="sources\Util.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="sources\Fish.cpp">
+    <ClCompile Include="sources\Image.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="sources\Predator.cpp">
+    <ClCompile Include="sources\SceneManager.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,10 +68,10 @@
     <ClInclude Include="headers\Util.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="headers\Fish.h">
+    <ClInclude Include="headers\Image.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="headers\Predator.h">
+    <ClInclude Include="headers\SceneManager.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

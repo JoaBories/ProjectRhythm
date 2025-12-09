@@ -1,23 +1,23 @@
 #pragma once
-#include "AssetBank.h"
-#include "Cam2D.h"
-#include "GameActor.h"
-#include "Fish.h"
-#include "Predator.h"
+
+#include "SceneManager.h"
 
 class Engine
 {
 private :
 
+	SceneManager* mSceneManager;
 	AssetBank* mAssetBank;
 	Cam2D* mCamera;
 
 public :
 	Engine() = default;
-	~Engine();
+	~Engine() = default;
 
 	void Init();
 	void InitActors();
+
+	void DeInit();
 
 	void Update();
 	void UpdateActors();

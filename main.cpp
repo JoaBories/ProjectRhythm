@@ -1,5 +1,4 @@
-#include "raylib.h"
-#include "headers/Engine.h"
+#include "Engine.h"
 
 void Init();
 void DeInit();
@@ -7,14 +6,14 @@ void UpdateDraw();
 void Update();
 void Draw();
 
-Engine engine;
+Engine mEngine;
 
-int screenHeight = 720; // Window Size
-int screenWidth = 1720;  //
+int screenHeight = 600; // Window Size
+int screenWidth = 700;  //
 
-Color backgroundColor = Color{ 10, 20, 40, 255 };
+Color backgroundColor = BLACK;
 
-const char* gameName = "Swarm Sim"; //Name of the window
+const char* gameName = "Starter Engine"; //Name of the window
 
 int main() {
 
@@ -32,16 +31,18 @@ int main() {
 
 void Init()
 {
-    srand((unsigned int)time(0));
+    srand((unsigned int) time(0));
 
     InitWindow(screenWidth, screenHeight, gameName);
     SetTargetFPS(60);
 
-    engine.Init();
+    mEngine.Init();
 }
 
 void DeInit()
 {
+    mEngine.DeInit();
+
     CloseWindow();
 }
 
@@ -58,11 +59,11 @@ void UpdateDraw()
 
 void Update()
 {
-    engine.Update();
+    mEngine.Update();
 }
 
 void Draw()
 {
-    engine.Draw();
+    mEngine.Draw();
 }
 
